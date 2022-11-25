@@ -24,7 +24,6 @@
             }
         }
 
-
         static void Main(string[] args)
         {
             int[] array = {1, 3, 6, 7, 8, 11, 12};
