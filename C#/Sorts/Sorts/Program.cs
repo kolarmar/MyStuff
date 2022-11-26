@@ -24,6 +24,21 @@ namespace Sorts
             return arr;
         }
 
+        static int FindMinIndex(int[] arr, int i)
+        {
+            int min = arr[i];
+            int minIndex = i;
+            for (int j = i; j < arr.Length; j++)
+            {
+                if (arr[j] < min)
+                {
+                    min = arr[j];
+                    minIndex = j;
+                }
+            }
+            return minIndex;
+        }
+
         static void Swap(ref int e1, ref int e2)
         {
             int temp = e1;
@@ -87,10 +102,34 @@ namespace Sorts
             return arr;
         }
 
+        static int[] InsertSort(int[] arr)
+        {
+            for(int i = 1; i < arr.Length; i++)
+            {
+                for (int j = i; j > 0; j--)
+                {
+                    if (arr[j - 1] > arr[j])
+                    {
+                        Swap(ref arr[j - 1], ref arr[j]);
+                    }
+                }
+            }
+            return arr;
+        }
+
+        static int[] SelectSort(int[] arr)
+        {
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int minIndex = FindMinIndex(arr, i);
+                Swap(ref arr[i], ref arr[minIndex]);
+            }
+            return arr;
+        }
         static void Main(string[] args)
         {
             int[] array = RandomArray(500);
-            array = ShakerSort(array);
+            array = SelectSort(array);
             PrintArray(array);
         }
     }
