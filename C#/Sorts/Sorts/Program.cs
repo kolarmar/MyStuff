@@ -126,10 +126,65 @@ namespace Sorts
             }
             return arr;
         }
+
+        static int[] MergeSort(int[] arr, int left, int right)
+        {
+            if(left < right)
+            {
+                int mid = left + (right - left) / 2;
+                MergeSort(arr, left, mid);
+                MergeSort(arr, mid + 1, right);
+                MergeBack(arr, left, mid, right);
+            }
+            return arr;
+        }
+
+        static void MergeBack(int[] arr, int left, int mid, int right)
+        {
+            int leftArrLength = mid - left + 1;
+            int rightArrLength = right - mid;
+            int[] leftTempArr = new int[leftArrLength];
+            int[] rightTempArr = new int[rightArrLength];
+            int i, j;
+
+            for(i = 0; i < leftArrLength; i++)
+            {
+                leftTempArr[i] = arr[left + i];
+            }
+            for (j = 0; j < rightArrLength; j++)
+            {
+                rightTempArr[j] = arr[mid + 1 + j];
+            }
+
+            i = 0;
+            j = 0;
+            int k = left;
+
+            while (i < leftArrLength && j < rightArrLength)
+            {
+                if (leftTempArr[i] <= rightTempArr[j])
+                {
+                    arr[k++] = leftTempArr[i++];
+                }
+                else
+                {
+                    arr[k++] = rightTempArr[j++];
+                }
+            }
+            while(i < leftArrLength)
+            {
+                arr[k++] = leftTempArr[i++];
+            }
+            while (j < rightArrLength)
+            {
+                arr[k++] = rightTempArr[j++];
+            }
+        }
+
         static void Main(string[] args)
         {
             int[] array = RandomArray(500);
-            array = SelectSort(array);
+            array = MergeSort(array, 0, array.Length - 1);
             PrintArray(array);
         }
     }
