@@ -1,4 +1,6 @@
-﻿namespace Sorts
+﻿using System.Net.Http.Headers;
+
+namespace Sorts
 {
     internal class Program
     {
@@ -22,9 +24,15 @@
             return arr;
         }
 
+        static void Swap(ref int e1, ref int e2)
+        {
+            int temp = e1;
+            e1 = e2;
+            e2 = temp;
+        }
+
         static int[] BubbleSort(int[] arr)
         {
-            int temp;
             for (int i = 0; i < arr.Length - 1; i++)
             {
                 bool swapReuqired = false;
@@ -32,9 +40,7 @@
                 {
                     if (arr[j] > arr[j + 1])
                     {
-                        temp = arr[j];
-                        arr[j] = arr[j + 1];
-                        arr[j + 1] = temp;
+                        Swap(ref arr[j], ref arr[j + 1]);
                         swapReuqired = true;
                     }
                 }
@@ -46,11 +52,45 @@
             return arr;
         }
 
+        static int[] ShakerSort(int[] arr)
+        {
+            bool swapRequired;
+            for (int i = 0; i < arr.Length / 2; i++)
+            {
+                swapRequired = false;
+                for (int j = i; j < arr.Length - i - 1; j++)
+                {
+                    if (arr[j] > arr[j + 1])
+                    {
+                        Swap(ref arr[j], ref arr[j + 1]);
+                        swapRequired = true;
+                    }
+                }
+                if (swapRequired == false)
+                {
+                    break;
+                }
+                swapRequired = false;
+                for (int j = arr.Length - i - 2; j > i; j--)
+                {
+                    if (arr[j - 1] > arr[j])
+                    {
+                        Swap(ref arr[j - 1], ref arr[j]);
+                        swapRequired = true;
+                    }
+                }
+                if (swapRequired == false)
+                {
+                    break;
+                }
+            }
+            return arr;
+        }
 
         static void Main(string[] args)
         {
-            int[] array = RandomArray(100);
-            array = BubbleSort(array); 
+            int[] array = RandomArray(500);
+            array = ShakerSort(array);
             PrintArray(array);
         }
     }
