@@ -10,19 +10,37 @@
             }
             Console.Write(arr[arr.Length - 1]);
         }
+        static int[] RandomArray(int size)
+        {
+            int[] arr = new int[size];
+            int maxNum = size;
+            var rnd = new Random();
+            for (int i = 0; i < size; i++)
+            {
+                arr[i] = rnd.Next(maxNum);
+            }
+            return arr;
+        }
+
         static int[] BubbleSort(int[] arr)
         {
             int temp;
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < arr.Length - 1; i++)
             {
-                for (int j = 0; j < arr.Length - 1; j++)
+                bool swapReuqired = false;
+                for (int j = 0; j < arr.Length - i - 1; j++)
                 {
                     if (arr[j] > arr[j + 1])
                     {
                         temp = arr[j];
                         arr[j] = arr[j + 1];
                         arr[j + 1] = temp;
+                        swapReuqired = true;
                     }
+                }
+                if (swapReuqired == false)
+                {
+                    break;
                 }
             }
             return arr;
@@ -31,7 +49,7 @@
 
         static void Main(string[] args)
         {
-            int[] array = { 5, 0, -3, -2, 11, 10 };
+            int[] array = RandomArray(100);
             array = BubbleSort(array); 
             PrintArray(array);
         }
