@@ -181,10 +181,44 @@ namespace Sorts
             }
         }
 
+        static int[] QuickSort(int[] arr, int leftIndex, int rightIndex)
+        {
+            int i = leftIndex;
+            int j = rightIndex;
+            int pivot = arr[leftIndex];
+
+            while (i <= j)
+            {
+                while (arr[i] < pivot)
+                {
+                    i++;
+                }
+                while (pivot < arr[j])
+                {
+                    j--;
+                }
+                if (i <= j)
+                {
+                    Swap(ref arr[i], ref arr[j]);
+                    i++;
+                    j--;
+                }
+            }
+            if (leftIndex < j)
+            {
+                QuickSort(arr, leftIndex, j);
+            }
+            if (i < rightIndex)
+            {
+                QuickSort(arr, i, rightIndex);
+            }
+            return arr;
+        }
+
         static void Main(string[] args)
         {
             int[] array = RandomArray(500);
-            array = MergeSort(array, 0, array.Length - 1);
+            array = QuickSort(array, 0, array.Length - 1);
             PrintArray(array);
         }
     }
