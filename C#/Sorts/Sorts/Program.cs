@@ -1,4 +1,6 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Diagnostics;
+using System.Net.Http.Headers;
+using System.Linq;
 
 namespace Sorts
 {
@@ -215,11 +217,78 @@ namespace Sorts
             return arr;
         }
 
+        static void CompareSorts(int[] arr, int left,int right)
+        {
+            Stopwatch stopwatch= new Stopwatch();
+            string SortUsed;
+            int[] selectArr, insertArr, quickArr;
+
+            // SELECT SORT
+            SortUsed = "select";
+            selectArr = arr.ToArray();
+            stopwatch.Start(); SelectSort(selectArr); stopwatch.Stop();
+            Console.WriteLine("Time elapsed for {0} sort: {1}", SortUsed, stopwatch.Elapsed);
+            stopwatch.Reset();
+
+            // INSERT SORT
+            SortUsed = "insert";
+            insertArr = arr.ToArray();
+            stopwatch.Start(); InsertSort(insertArr); stopwatch.Stop();
+            Console.WriteLine("Time elapsed for {0} sort: {1}", SortUsed, stopwatch.Elapsed);
+            stopwatch.Reset();
+
+            // QUICK SORT
+            SortUsed = "quick";
+            quickArr = arr.ToArray();
+            stopwatch.Start(); QuickSort(quickArr, left, right); stopwatch.Stop();
+            Console.WriteLine("Time elapsed for {0} sort: {1}", SortUsed, stopwatch.Elapsed);
+            stopwatch.Reset();
+
+        }
+
         static void Main(string[] args)
         {
-            int[] array = RandomArray(500);
-            array = QuickSort(array, 0, array.Length - 1);
-            PrintArray(array);
+            int[] array = RandomArray(200000);
+            CompareSorts(array, 0, array.Length - 1);
+            /*
+
+            250 elements:
+            Time elapsed for select sort: 00:00:00.0003182
+            Time elapsed for insert sort: 00:00:00.0003559
+            Time elapsed for quick sort: 00:00:00.0001682
+
+            500 elements:
+            Time elapsed for select sort: 00:00:00.0006726
+            Time elapsed for insert sort: 00:00:00.0008965
+            Time elapsed for quick sort: 00:00:00.0002026
+
+            1000 elements:
+            Time elapsed for select sort: 00:00:00.0017868
+            Time elapsed for insert sort: 00:00:00.0035529
+            Time elapsed for quick sort: 00:00:00.0003212
+
+            10000 elements:
+            Time elapsed for select sort: 00:00:00.1523438
+            Time elapsed for insert sort: 00:00:00.2842147
+            Time elapsed for quick sort: 00:00:00.0018829
+
+            50000 elements:
+            Time elapsed for select sort: 00:00:03.8075869
+            Time elapsed for insert sort: 00:00:06.8326245
+            Time elapsed for quick sort: 00:00:00.0088186
+
+            100000 elements:
+            Time elapsed for select sort: 00:00:14.5775813
+            Time elapsed for insert sort: 00:00:27.2025551
+            Time elapsed for quick sort: 00:00:00.0178450
+
+            200000 elements:
+            Time elapsed for select sort: 00:01:08.3395374
+            Time elapsed for insert sort: 00:02:09.3815292
+            Time elapsed for quick sort: 00:00:00.0383943
+
+             */
+
         }
     }
 }
