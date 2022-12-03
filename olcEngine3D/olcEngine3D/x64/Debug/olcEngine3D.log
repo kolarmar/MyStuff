@@ -8,4 +8,10 @@ C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(309,5
 C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(309,34): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(308,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(308,43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(315,55): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(315,34): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(314,55): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(314,34): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(313,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(313,43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   olcEngine3D.vcxproj -> C:\Users\Games\Desktop\CodingStuff\olcEngine3D\x64\Debug\olcEngine3D.exe
