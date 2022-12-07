@@ -80,6 +80,9 @@ private:
     mat4x4 matProj;
 
     vec3d vCamera;
+    vec3d vLookDirection;
+
+    float fYaw;
 
     float fTheta;
 
@@ -177,6 +180,57 @@ private:
         return matrix;
     }
 
+    mat4x4 Matrix_PointAt(vec3d& pos, vec3d& target, vec3d& up)
+    {
+        // Calculate new forward direction
+        vec3d newForward = Vector_Sub(target, pos);
+        newForward = Vector_Normalize(newForward);
+
+        // Calculate new up direction
+        vec3d a = Vector_Mul(newForward, Vector_DotProduct(up, newForward));
+        vec3d newUp = Vector_Sub(up, a);
+        newUp = Vector_Normalize(newUp);
+
+        // Calculate new right direction
+        vec3d newRight = Vector_CrossProduct(newUp, newForward);
+
+        mat4x4 matrix;
+        matrix.m[0][0] = newRight.x;
+        matrix.m[1][0] = newUp.x;
+        matrix.m[2][0] = newForward.x;
+        matrix.m[3][0] = pos.x;
+
+        matrix.m[0][1] = newRight.y;
+        matrix.m[1][1] = newUp.y;
+        matrix.m[2][1] = newForward.y;
+        matrix.m[3][1] = pos.y;
+
+        matrix.m[0][2] = newRight.z;
+        matrix.m[1][2] = newUp.z;
+        matrix.m[2][2] = newForward.z;
+        matrix.m[3][2] = pos.z;
+
+        matrix.m[0][3] = 0.0f;
+        matrix.m[1][3] = 0.0f;
+        matrix.m[2][3] = 0.0f;
+        matrix.m[3][3] = 1.0f;
+
+        return matrix;
+
+    }
+
+    mat4x4 Matrix_QuickInverse(mat4x4& m)
+    {
+        mat4x4 matrix;
+        matrix.m[0][0] = m.m[0][0]; matrix.m[0][1] = m.m[1][0]; matrix.m[0][2] = m.m[2][0]; matrix.m[0][3] = 0.0f;
+        matrix.m[1][0] = m.m[0][1]; matrix.m[1][1] = m.m[1][1]; matrix.m[1][2] = m.m[2][1]; matrix.m[1][3] = 0.0f;
+        matrix.m[2][0] = m.m[0][2]; matrix.m[2][1] = m.m[1][2]; matrix.m[2][2] = m.m[2][2]; matrix.m[2][3] = 0.0f;
+        matrix.m[3][0] = -(m.m[3][0] * matrix.m[0][0] + m.m[3][1] * matrix.m[1][0] + m.m[3][2] * matrix.m[2][0]);
+        matrix.m[3][1] = -(m.m[3][0] * matrix.m[0][1] + m.m[3][1] * matrix.m[1][1] + m.m[3][2] * matrix.m[2][1]);
+        matrix.m[3][2] = -(m.m[3][0] * matrix.m[0][2] + m.m[3][1] * matrix.m[1][2] + m.m[3][2] * matrix.m[2][2]);
+        matrix.m[3][3] = 1.0f;
+        return matrix;
+    }
 
     vec3d Vector_Add(vec3d& v1, vec3d& v2)
     {
@@ -261,7 +315,7 @@ public:
     bool OnUserCreate() override
     {
 
-        meshCube.LoadFromObjectFile("SpaceShip.obj");
+        meshCube.LoadFromObjectFile("axis.obj");
 
         matProj = Matrix_MakeProjection(160.0f, (float)ScreenHeight() / (float)ScreenWidth(), 0.1f, 1000.0f);
 
@@ -270,27 +324,65 @@ public:
 
     bool OnUserUpdate(float fElapsedTime) override
     {
+        if (GetKey(VK_UP).bHeld)
+            vCamera.y += 8.0f * fElapsedTime;
+
+        if (GetKey(VK_DOWN).bHeld)
+            vCamera.y -= 8.0f * fElapsedTime;
+
+        if (GetKey(VK_LEFT).bHeld)
+            vCamera.x += 8.0f * fElapsedTime;
+
+        if (GetKey(VK_RIGHT).bHeld)
+            vCamera.x -= 8.0f * fElapsedTime;
+
+        vec3d vForward = Vector_Mul(vLookDirection, 8.0f * fElapsedTime);
+
+        if (GetKey(L'W').bHeld)
+            vCamera = Vector_Add(vCamera, vForward);
+
+        if (GetKey(L'S').bHeld)
+            vCamera = Vector_Sub(vCamera, vForward);
+
+
+        if (GetKey(L'A').bHeld)
+            fYaw -= 2.0f * fElapsedTime;
+
+        if (GetKey(L'D').bHeld)
+            fYaw += 2.0f * fElapsedTime;
+
+
+
         Fill(0, 0, ScreenWidth(), ScreenHeight(), PIXEL_SOLID, FG_BLACK);
 
         mat4x4 matRotZ, matRotX;
-        fTheta += 1.0f * fElapsedTime;
+        //fTheta += 1.0f * fElapsedTime;
 
         matRotX = Matrix_MakeRotationX(fTheta * 0.5f);
         matRotZ = Matrix_MakeRotationZ(fTheta);
 
         mat4x4 matTrans;
-        matTrans = Matrix_MakeTranslation(0.0f, 0.0f, 16.0f);
+        matTrans = Matrix_MakeTranslation(0.0f, 0.0f, 15.0f);
 
         mat4x4 matWorld;
         matWorld = Matrix_MakeIdentity();
         matWorld = Matrix_MultiplyMatrix(matRotX, matRotZ);
         matWorld = Matrix_MultiplyMatrix(matWorld, matTrans);
 
+        vec3d vUp = { 0,1,0 };
+        vec3d vTarget = { 0,0,1 };
+        mat4x4 matCameraRot = Matrix_MakeRotationY(fYaw);
+        vLookDirection = Matrix_MultiplyVector(matCameraRot, vTarget);
+        vTarget = Vector_Add(vCamera, vLookDirection);
+
+        mat4x4 matCamera = Matrix_PointAt(vCamera, vTarget, vUp);
+        mat4x4 matView = Matrix_QuickInverse(matCamera);
+
         vector<triangle> vecTrianglesToRaster;
 
         for (auto tri : meshCube.tris)
         {
-            triangle triProjected, triTransformed;
+            triangle triProjected, triTransformed, triViewed;
 
             triTransformed.p[0] = Matrix_MultiplyVector(matWorld, tri.p[0]);
             triTransformed.p[1] = Matrix_MultiplyVector(matWorld, tri.p[1]);
@@ -317,20 +409,27 @@ public:
                 light_direction = Vector_Normalize(light_direction);
 
                 // How simillar/alligned are light direction and normal vectors
-                float dp = Vector_DotProduct(light_direction, normal);
+                float dp = max(0.1f,Vector_DotProduct(light_direction, normal));
 
                 // Console colours
                 CHAR_INFO c = GetColour(dp);
                 triTransformed.col = c.Attributes;
                 triTransformed.sym = c.Char.UnicodeChar;
 
-                // Apply the projetion matrix onto the rotated triangle
+                // Convert World Space to View Space
+                triViewed.p[0] = Matrix_MultiplyVector(matView, triTransformed.p[0]);
+                triViewed.p[1] = Matrix_MultiplyVector(matView, triTransformed.p[1]);
+                triViewed.p[2] = Matrix_MultiplyVector(matView, triTransformed.p[2]);
+                triViewed.sym = triTransformed.sym;
+                triViewed.col = triTransformed.col;
+
+
                 // 3D -> 2D PROJECTION
-                triProjected.p[0] = Matrix_MultiplyVector(matProj, triTransformed.p[0]);
-                triProjected.p[1] = Matrix_MultiplyVector(matProj, triTransformed.p[1]);
-                triProjected.p[2] = Matrix_MultiplyVector(matProj, triTransformed.p[2]);
-                triProjected.col = triTransformed.col;
-                triProjected.sym = triTransformed.sym;
+                triProjected.p[0] = Matrix_MultiplyVector(matProj, triViewed.p[0]);
+                triProjected.p[1] = Matrix_MultiplyVector(matProj, triViewed.p[1]);
+                triProjected.p[2] = Matrix_MultiplyVector(matProj, triViewed.p[2]);
+                triProjected.col = triViewed.col;
+                triProjected.sym = triViewed.sym;
 
                 // Divide by "z" depth. "w" represents z coordinate in 3D
                 triProjected.p[0] = Vector_Div(triProjected.p[0], triProjected.p[0].w);
