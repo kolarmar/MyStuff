@@ -14,10 +14,9 @@ namespace Sorts
             }
             Console.Write(arr[arr.Length - 1]);
         }
-        static int[] RandomArray(int size)
+        static int[] RandomArray(int size, int maxNum)
         {
             int[] arr = new int[size];
-            int maxNum = size;
             var rnd = new Random();
             for (int i = 0; i < size; i++)
             {
@@ -248,8 +247,10 @@ namespace Sorts
 
         static void Main(string[] args)
         {
-            int[] array = RandomArray(200000);
-            CompareSorts(array, 0, array.Length - 1);
+            int[] array = RandomArray(2000, 10000);
+            QuickSort(array, 0, array.Length - 1);
+            PrintArray(array);
+            //CompareSorts(array, 0, array.Length - 1);
             /*
 
             250 elements:
