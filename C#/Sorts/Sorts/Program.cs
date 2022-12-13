@@ -652,7 +652,7 @@ namespace Sorts
 
         static void Main(string[] args)
         {
-            int[] array = RandomArray(100, 1000000);
+            int[] array = RandomArray(10000, 1000000);
             Sort_CompareTime(array);
             Console.WriteLine();
             Sort_CompareSwaps(array);

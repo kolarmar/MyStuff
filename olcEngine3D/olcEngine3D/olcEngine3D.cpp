@@ -315,7 +315,7 @@ public:
     bool OnUserCreate() override
     {
 
-        meshCube.LoadFromObjectFile("axis.obj");
+        meshCube.LoadFromObjectFile("SpaceShip.obj");
 
         matProj = Matrix_MakeProjection(160.0f, (float)ScreenHeight() / (float)ScreenWidth(), 0.1f, 1000.0f);
 
