@@ -156,7 +156,7 @@ namespace SortAlgorithms
             return array;
         }
 
-        public static int[] Quick(int[] array, int leftIndex, int rightIndex)
+        public static int[] QuickV1(int[] array, int leftIndex, int rightIndex)
         {
             int i = leftIndex;
             int j = rightIndex;
@@ -181,12 +181,65 @@ namespace SortAlgorithms
             }
             if (leftIndex < j)
             {
-                Quick(array, leftIndex, j);
+                QuickV1(array, leftIndex, j);
             }
             if (i < rightIndex)
             {
-                Quick(array, i, rightIndex);
+                QuickV1(array, i, rightIndex);
             }
+            return array;
+        }
+
+        public static int[] QuickV2(int[] array, int leftIndex, int rightIndex)
+        {
+            int i = leftIndex;
+            int j = rightIndex;
+            int pivot = array[leftIndex];
+
+            // When the subarray is under 130 elements, it is faster to use insertion sort.
+            // This makes this sort about twice as fast for huge arrays, though a bit slower for small arrays.
+            if (rightIndex - leftIndex < 130)
+            {
+                for (int k = leftIndex; k < rightIndex - leftIndex + 1; k++)
+                {
+                    for (int l = k; l > 0; l--)
+                    {
+                        if (array[l - 1] > array[l])
+                        {
+                            Swap(ref array[l - 1], ref array[l]);
+                        }
+                    }
+                }
+                return array;
+            }
+
+            while (i <= j)
+            {
+                while (array[i] < pivot)
+                {
+                    i++;
+                }
+                while (pivot < array[j])
+                {
+                    j--;
+                }
+                if (i <= j)
+                {
+                    Swap(ref array[i], ref array[j]);
+                    i++;
+                    j--;
+                }
+            }
+
+            if (leftIndex < j)
+            {
+                QuickV2(array, leftIndex, j);
+            }
+            if (i < rightIndex)
+            {
+                QuickV2(array, i, rightIndex);
+            }
+
             return array;
         }
 
@@ -287,10 +340,17 @@ namespace SortAlgorithms
             return stopwatch.Elapsed;
         }
 
-        public static TimeSpan Time_Quick(int[] array)
+        public static TimeSpan Time_QuickV1(int[] array)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
-            Quick(array, 0, array.Length - 1);
+            QuickV1(array, 0, array.Length - 1);
+            stopwatch.Stop();
+            return stopwatch.Elapsed;
+        }
+        public static TimeSpan Time_QuickV2(int[] array)
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            QuickV2(array, 0, array.Length - 1);
             stopwatch.Stop();
             return stopwatch.Elapsed;
         }
@@ -412,7 +472,7 @@ namespace SortAlgorithms
         }
 
 
-        public static int Compare_Quick(int[] arr, int leftIndex, int rightIndex, int compared)
+        public static int Compare_QuickV1(int[] arr, int leftIndex, int rightIndex, int compared)
         {
             int i = leftIndex;
             int j = rightIndex;
@@ -422,10 +482,12 @@ namespace SortAlgorithms
             {
                 while (arr[i] < pivot)
                 {
+                    compared++;
                     i++;
                 }
                 while (pivot < arr[j])
                 {
+                    compared++;
                     j--;
                 }
                 compared++;
@@ -439,13 +501,69 @@ namespace SortAlgorithms
             compared++;
             if (leftIndex < j)
             {
-                return Compare_Quick(arr, leftIndex, j, compared);
+                return Compare_QuickV1(arr, leftIndex, j, compared);
             }
             compared++;
             if (i < rightIndex)
             {
-                return Compare_Quick(arr, i, rightIndex, compared);
+                return Compare_QuickV1(arr, i, rightIndex, compared);
             }
+            return compared;
+        }
+        public static int Compare_QuickV2(int[] array, int leftIndex, int rightIndex, int compared)
+        {
+            int i = leftIndex;
+            int j = rightIndex;
+            int pivot = array[leftIndex];
+
+            compared++;
+            if (rightIndex - leftIndex < 130)
+            {
+                for (int k = leftIndex; k < rightIndex - leftIndex + 1; k++)
+                {
+                    for (int l = k; l > 0; l--)
+                    {
+                        compared++;
+                        if (array[l - 1] > array[l])
+                        {
+                            Swap(ref array[l - 1], ref array[l]);
+                        }
+                    }
+                }
+                return compared;
+            }
+
+            while (i <= j)
+            {
+                while (array[i] < pivot)
+                {
+                    compared++;
+                    i++;
+                }
+                while (pivot < array[j])
+                {
+                    compared++;
+                    j--;
+                }
+                compared++;
+                if (i <= j)
+                {
+                    Swap(ref array[i], ref array[j]);
+                    i++;
+                    j--;
+                }
+            }
+            compared++;
+            if (leftIndex < j)
+            {
+                Compare_QuickV2(array, leftIndex, j, compared);
+            }
+            compared++;
+            if (i < rightIndex)
+            {
+                Compare_QuickV2(array, i, rightIndex, compared);
+            }
+
             return compared;
         }
 
@@ -550,7 +668,7 @@ namespace SortAlgorithms
             return swapTimes;
         }
 
-        public static int Swap_Quick(int[] arr, int leftIndex, int rightIndex, int swapTimes)
+        public static int Swap_QuickV1(int[] arr, int leftIndex, int rightIndex, int swapTimes)
         {
             int i = leftIndex;
             int j = rightIndex;
@@ -575,12 +693,63 @@ namespace SortAlgorithms
             }
             if (leftIndex < j)
             {
-                return Swap_Quick(arr, leftIndex, j, swapTimes);
+                return Swap_QuickV1(arr, leftIndex, j, swapTimes);
             }
             if (i < rightIndex)
             {
-                return Swap_Quick(arr, i, rightIndex, swapTimes);
+                return Swap_QuickV1(arr, i, rightIndex, swapTimes);
             }
+            return swapTimes;
+        }
+
+        public static int Swap_QuickV2(int[] array, int leftIndex, int rightIndex, int swapTimes)
+        {
+            int i = leftIndex;
+            int j = rightIndex;
+            int pivot = array[leftIndex];
+
+            if (rightIndex - leftIndex < 130)
+            {
+                for (int k = leftIndex; k < rightIndex - leftIndex + 1; k++)
+                {
+                    for (int l = k; l > 0; l--)
+                    {
+                        if (array[l - 1] > array[l])
+                        {
+                            MeasureSwap(ref array[l - 1], ref array[l], ref swapTimes);
+                        }
+                    }
+                }
+                return swapTimes;
+            }
+
+            while (i <= j)
+            {
+                while (array[i] < pivot)
+                {
+                    i++;
+                }
+                while (pivot < array[j])
+                {
+                    j--;
+                }
+                if (i <= j)
+                {
+                    MeasureSwap(ref array[i], ref array[j], ref swapTimes);
+                    i++;
+                    j--;
+                }
+            }
+
+            if (leftIndex < j)
+            {
+                Swap_QuickV2(array, leftIndex, j, swapTimes);
+            }
+            if (i < rightIndex)
+            {
+                Swap_QuickV2(array, i, rightIndex, swapTimes);
+            }
+
             return swapTimes;
         }
 
@@ -597,14 +766,15 @@ namespace SortAlgorithms
             int[] d = array.ToArray();
             int[] e = array.ToArray();
             int[] f = array.ToArray();
-            //int[] g = array.ToArray();
+            int[] g = array.ToArray();
 
             Console.WriteLine("Time taken with BUBBLE V1 sort: " + Time_BubbleV1(a));
             Console.WriteLine("Time taken with BUBBLE V2 sort: " + Time_BubbleV2(b));
             Console.WriteLine("Time taken with SHAKER sort: " + Time_Shaker(c));
             Console.WriteLine("Time taken with INSERT sort: " + Time_Insert(d));
             Console.WriteLine("Time taken with SELECT sort: " + Time_Select(e));
-            Console.WriteLine("Time taken with QUICK sort: " + Time_Quick(f));
+            Console.WriteLine("Time taken with QUICK V1 sort: " + Time_QuickV1(f));
+            Console.WriteLine("Time taken with QUICK V2 sort: " + Time_QuickV2(g));
 
             //Console.WriteLine("Time taken with MERGE sort: " + Time_Merge(g));
 
@@ -620,15 +790,15 @@ namespace SortAlgorithms
             int[] d = array.ToArray();
             int[] e = array.ToArray();
             int[] f = array.ToArray();
-            //int[] g = array.ToArray();
+            int[] g = array.ToArray();
 
             Console.WriteLine("Comparisons made with BUBBLE V1 sort: " + Compare_BubbleV1(a));
             Console.WriteLine("Comparisons made with BUBBLE V2 sort: " + Compare_BubbleV2(b));
             Console.WriteLine("Comparisons made with SHAKER sort: " + Compare_Shaker(c));
             Console.WriteLine("Comparisons made with INSERT sort: " + Compare_Insert(d));
             Console.WriteLine("Comparisons made with SELECT sort: " + Compare_Select(e));
-            Console.WriteLine("Comparisons made with QUICK sort: " + Compare_Quick(f, 0, f.Length -  1, 0));
-
+            Console.WriteLine("Comparisons made with QUICK V1 sort: " + Compare_QuickV1(f, 0, f.Length -  1, 0));
+            Console.WriteLine("Comparisons made with QUICK V2 sort: " + Compare_QuickV2(g, 0, g.Length - 1, 0));
 
             Console.WriteLine();
         }
@@ -642,14 +812,15 @@ namespace SortAlgorithms
             int[] d = array.ToArray();
             int[] e = array.ToArray();
             int[] f = array.ToArray();
+            int[] g = array.ToArray();
 
             Console.WriteLine("Swaps required with BUBBLE V1 sort: " + Swap_BubbleV1(a));
             Console.WriteLine("Swaps required with BUBBLE V2 sort: " + Swap_BubbleV2(b));
             Console.WriteLine("Swaps required with SHAKER sort: " + Swap_Shaker(c));
             Console.WriteLine("Swaps required with INSERT sort: " + Swap_Insert(d));
             Console.WriteLine("Swaps required with SELECT sort: " + Swap_Select(e));
-            Console.WriteLine("Swaps required with QUICK sort: " + Swap_Quick(f, 0, f.Length - 1, 0));
-
+            Console.WriteLine("Swaps required with QUICK V1 sort: " + Swap_QuickV1(f, 0, f.Length - 1, 0));
+            Console.WriteLine("Swaps required with QUICK V2 sort: " + Swap_QuickV2(g, 0, g.Length - 1, 0));
 
             Console.WriteLine();
         }
@@ -659,7 +830,10 @@ namespace SortAlgorithms
     {
         static void Main(string[] args)
         {
-            int[] array = Utility.GetRandArray(1000, 1000000);
+            int[] array = Utility.GetRandArray(20000, 1000000);
+            //Sort.QuickV2(array, 0, array.Length - 1);
+            //Utility.PrintArray(array);
+
             SortComparison.CompareTime(array);
             SortComparison.CompareIfs(array);
             SortComparison.CompareSwaps(array);
