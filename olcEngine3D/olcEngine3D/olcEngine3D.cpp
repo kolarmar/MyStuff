@@ -277,6 +277,105 @@ private:
         return v;
     }
 
+    vec3d Vector_IntersectPlane(vec3d& plane_p, vec3d& plane_n, vec3d& lineStart, vec3d& lineEnd)
+    {
+        plane_n = Vector_Normalize(plane_n);
+        float plane_d = -Vector_DotProduct(plane_n, plane_p);
+        float ad = Vector_DotProduct(lineStart, plane_n);
+        float bd = Vector_DotProduct(lineEnd, plane_n);
+        float t = (-plane_d - ad) / (bd - ad);
+        vec3d lineStartToEnd = Vector_Sub(lineEnd, lineStart);
+        vec3d lineToIntersect = Vector_Mul(lineStartToEnd, t);
+        return Vector_Add(lineStart, lineToIntersect);
+    }
+
+    int Triangle_ClipAgainstPlane(vec3d plane_p, vec3d plane_n, triangle& in_tri, triangle& out_tri1, triangle& out_tri2)
+    {
+        plane_n = Vector_Normalize(plane_n);
+
+        // Return the shortest distance from point to plane
+        auto dist = [&](vec3d& p)
+        {
+            vec3d n = Vector_Normalize(p);
+            return (plane_n.x * p.x + plane_n.y * p.y + plane_n.z * p.z - Vector_DotProduct(plane_n, plane_p));
+        };
+
+        vec3d* inside_points[3]; int nInsidePointCount = 0;
+        vec3d* outside_points[3]; int nOutsidePointCount = 0;
+
+        float d0 = dist(in_tri.p[0]);
+        float d1 = dist(in_tri.p[1]);
+        float d2 = dist(in_tri.p[2]);
+
+        if (d0 >= 0) { inside_points[nInsidePointCount++] = &in_tri.p[0]; }
+        else { outside_points[nOutsidePointCount++] = &in_tri.p[0]; }
+
+        if (d1 >= 0) { inside_points[nInsidePointCount++] = &in_tri.p[1]; }
+        else { outside_points[nOutsidePointCount++] = &in_tri.p[1]; }
+
+        if (d2 >= 0) { inside_points[nInsidePointCount++] = &in_tri.p[2]; }
+        else { outside_points[nOutsidePointCount++] = &in_tri.p[2]; }
+
+
+        // Classify triangle points
+
+        if (nInsidePointCount == 0) 
+        {
+            // All points lie on the outside of plane, clip whole tiangle
+
+            return 0; // No returned triangles are valid
+        }
+
+        if (nInsidePointCount == 3)
+        {
+            // All points lie on the inside of plane, do nothing
+
+            out_tri1 = in_tri;
+
+            return 1;
+        }
+
+        if (nInsidePointCount == 1 && nOutsidePointCount == 2)
+        {
+            // Copy appearance info into new triangle
+            out_tri1.col = FG_BLUE;//in_tri.col;
+            out_tri1.sym = in_tri.sym;
+
+            // Keep the valid point
+            out_tri1.p[0] = *inside_points[0];
+
+            // New points are where the original lines intersect with the plane
+            out_tri1.p[1] = Vector_IntersectPlane(plane_p, plane_n, *inside_points[0], *outside_points[0]);
+            out_tri1.p[2] = Vector_IntersectPlane(plane_p, plane_n, *inside_points[0], *outside_points[1]);
+
+            return 1;
+        }
+
+        if (nInsidePointCount == 2 && nOutsidePointCount == 1)
+        {
+            // Copy appearance info into new triangle
+            out_tri1.col = FG_GREEN;//in_tri.col;
+            out_tri1.sym = in_tri.sym;
+
+            out_tri2.col = FG_RED;//in_tri.col;
+            out_tri2.sym = in_tri.sym;
+
+
+            out_tri1.p[0] = *inside_points[0];
+            out_tri1.p[1] = *inside_points[1];
+            out_tri1.p[2] = Vector_IntersectPlane(plane_p, plane_n, *inside_points[0], *outside_points[0]);
+
+            out_tri2.p[0] = *inside_points[1];
+            out_tri2.p[1] = out_tri1.p[2];
+            out_tri2.p[2] = Vector_IntersectPlane(plane_p, plane_n, *inside_points[1], *outside_points[0]);
+
+            return 2;
+        }
+
+
+    }
+
+
     CHAR_INFO GetColour(float lum)
     {
         short bg_col, fg_col;
@@ -315,7 +414,7 @@ public:
     bool OnUserCreate() override
     {
 
-        meshCube.LoadFromObjectFile("SpaceShip.obj");
+        meshCube.LoadFromObjectFile("mountains.obj");
 
         matProj = Matrix_MakeProjection(160.0f, (float)ScreenHeight() / (float)ScreenWidth(), 0.1f, 1000.0f);
 
@@ -353,7 +452,7 @@ public:
 
 
 
-        Fill(0, 0, ScreenWidth(), ScreenHeight(), PIXEL_SOLID, FG_BLACK);
+        
 
         mat4x4 matRotZ, matRotX;
         //fTheta += 1.0f * fElapsedTime;
@@ -409,7 +508,7 @@ public:
                 light_direction = Vector_Normalize(light_direction);
 
                 // How simillar/alligned are light direction and normal vectors
-                float dp = max(0.1f,Vector_DotProduct(light_direction, normal));
+                float dp = max(0.1f, Vector_DotProduct(light_direction, normal));
 
                 // Console colours
                 CHAR_INFO c = GetColour(dp);
@@ -423,37 +522,43 @@ public:
                 triViewed.sym = triTransformed.sym;
                 triViewed.col = triTransformed.col;
 
+                // Clip Viewed Triangle against near plane
+                int nClippedTriangles = 0;
+                triangle clipped[2];
+                nClippedTriangles = Triangle_ClipAgainstPlane({ 0.0f, 0.0f, 0.1f }, { 0.0f, 0.0f, 1.0f }, triViewed, clipped[0], clipped[1]);
 
-                // 3D -> 2D PROJECTION
-                triProjected.p[0] = Matrix_MultiplyVector(matProj, triViewed.p[0]);
-                triProjected.p[1] = Matrix_MultiplyVector(matProj, triViewed.p[1]);
-                triProjected.p[2] = Matrix_MultiplyVector(matProj, triViewed.p[2]);
-                triProjected.col = triViewed.col;
-                triProjected.sym = triViewed.sym;
+                for (int n = 0; n < nClippedTriangles; n++)
+                {
+                    // 3D -> 2D PROJECTION
+                    triProjected.p[0] = Matrix_MultiplyVector(matProj, clipped[n].p[0]);
+                    triProjected.p[1] = Matrix_MultiplyVector(matProj, clipped[n].p[1]);
+                    triProjected.p[2] = Matrix_MultiplyVector(matProj, clipped[n].p[2]);
+                    triProjected.col = clipped[n].col;
+                    triProjected.sym = clipped[n].sym;
 
-                // Divide by "z" depth. "w" represents z coordinate in 3D
-                triProjected.p[0] = Vector_Div(triProjected.p[0], triProjected.p[0].w);
-                triProjected.p[1] = Vector_Div(triProjected.p[1], triProjected.p[1].w);
-                triProjected.p[2] = Vector_Div(triProjected.p[2], triProjected.p[2].w);
+                    // Divide by "z" depth. "w" represents z coordinate in 3D
+                    triProjected.p[0] = Vector_Div(triProjected.p[0], triProjected.p[0].w);
+                    triProjected.p[1] = Vector_Div(triProjected.p[1], triProjected.p[1].w);
+                    triProjected.p[2] = Vector_Div(triProjected.p[2], triProjected.p[2].w);
 
-                // Scale into view
-                vec3d vOffsetView = { 1,1,0 };
-                triProjected.p[0] = Vector_Add(triProjected.p[0], vOffsetView);
-                triProjected.p[1] = Vector_Add(triProjected.p[1], vOffsetView);
-                triProjected.p[2] = Vector_Add(triProjected.p[2], vOffsetView);
+                    // Scale into view
+                    vec3d vOffsetView = { 1,1,0 };
+                    triProjected.p[0] = Vector_Add(triProjected.p[0], vOffsetView);
+                    triProjected.p[1] = Vector_Add(triProjected.p[1], vOffsetView);
+                    triProjected.p[2] = Vector_Add(triProjected.p[2], vOffsetView);
 
-                triProjected.p[0].x *= 0.5f * (float)ScreenWidth();
-                triProjected.p[0].y *= 0.5f * (float)ScreenWidth();
+                    triProjected.p[0].x *= 0.5f * (float)ScreenWidth();
+                    triProjected.p[0].y *= 0.5f * (float)ScreenHeight();
 
-                triProjected.p[1].x *= 0.5f * (float)ScreenWidth();
-                triProjected.p[1].y *= 0.5f * (float)ScreenWidth();
+                    triProjected.p[1].x *= 0.5f * (float)ScreenWidth();
+                    triProjected.p[1].y *= 0.5f * (float)ScreenHeight();
 
-                triProjected.p[2].x *= 0.5f * (float)ScreenWidth();
-                triProjected.p[2].y *= 0.5f * (float)ScreenWidth();
+                    triProjected.p[2].x *= 0.5f * (float)ScreenWidth();
+                    triProjected.p[2].y *= 0.5f * (float)ScreenHeight();
 
-                // Store triangle for sorting
-                vecTrianglesToRaster.push_back(triProjected);
-
+                    // Store triangle for sorting
+                    vecTrianglesToRaster.push_back(triProjected);
+                }
             }
         }
 
@@ -465,18 +570,49 @@ public:
                 return z1 > z2;
             });
 
-        // Rasterize triangles
-        for (auto& triProjected : vecTrianglesToRaster)
-        {
-            FillTriangle(triProjected.p[0].x, triProjected.p[0].y,
-                triProjected.p[1].x, triProjected.p[1].y,
-                triProjected.p[2].x, triProjected.p[2].y,
-                triProjected.sym, triProjected.col);
+        // Clear screen
+        Fill(0, 0, ScreenWidth(), ScreenHeight(), PIXEL_SOLID, FG_BLACK);
 
-            /*DrawTriangle(triProjected.p[0].x, triProjected.p[0].y,
-                triProjected.p[1].x, triProjected.p[1].y,
-                triProjected.p[2].x, triProjected.p[2].y,
-                PIXEL_SOLID, FG_BLACK);*/
+
+
+        // Rasterize triangles
+        for (auto& triToRaster : vecTrianglesToRaster)
+        {
+            triangle clipped[2];
+            list<triangle> listTriangles;
+            listTriangles.push_back(triToRaster);
+            int nNewTriangles = 1;
+
+            for (int p = 0; p < 4; p++)
+            {
+                int nTrisToAdd = 0;
+                while (nNewTriangles > 0)
+                {
+                    triangle test = listTriangles.front();
+                    listTriangles.pop_front();
+                    nNewTriangles--;
+
+                    switch (p)
+                    {
+                    case 0: nTrisToAdd = Triangle_ClipAgainstPlane({ 0.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, test, clipped[0], clipped[1]); break;
+                    case 1: nTrisToAdd = Triangle_ClipAgainstPlane({ 0.0f, (float)ScreenHeight() - 1, 0.0f}, {0.0f, -1.0f, 0.0f}, test, clipped[0], clipped[1]); break;
+                    case 2: nTrisToAdd = Triangle_ClipAgainstPlane({ 0.0f, 0.0f, 0.0f }, { 1.0f, 0.0f, 0.0f }, test, clipped[0], clipped[1]); break;
+                    case 3: nTrisToAdd = Triangle_ClipAgainstPlane({ (float)ScreenWidth() - 1, 0.0f, 0.0f}, {-1.0f, 1.0f, 0.0f}, test, clipped[0], clipped[1]); break;
+                    }
+
+                    for (int w = 0; w < nTrisToAdd; w++)
+                    {
+                        listTriangles.push_back(clipped[w]);
+                    }
+                }
+                nNewTriangles = listTriangles.size();
+            }
+
+            for (auto& t : listTriangles)
+            {
+                FillTriangle(t.p[0].x, t.p[0].y, t.p[1].x, t.p[1].y, t.p[2].x, t.p[2].y, t.sym, t.col);
+                DrawTriangle(t.p[0].x, t.p[0].y, t.p[1].x, t.p[1].y, t.p[2].x, t.p[2].y, PIXEL_SOLID, FG_BLACK);
+            }
         }
 
         return true;
