@@ -1,0 +1,15 @@
+﻿  CirclePhysics.cpp
+C:\Users\Games\Desktop\CodingStuff\CirclePhysics\CirclePhysics\olcConsoleGameEngine.h(759,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\CirclePhysics\CirclePhysics\olcConsoleGameEngine.h(1099,1): warning C4267: 'return': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\CirclePhysics\CirclePhysics\olcConsoleGameEngine.h(1196,1): warning C4312: 'type cast': conversion from 'DWORD' to 'olcConsoleGameEngine *' of greater size
+C:\Users\Games\Desktop\CodingStuff\CirclePhysics\CirclePhysics\CirclePhysics.cpp(40,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\CirclePhysics\CirclePhysics\CirclePhysics.cpp(53,124): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\CirclePhysics\CirclePhysics\CirclePhysics.cpp(84,81): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\CirclePhysics\CirclePhysics\CirclePhysics.cpp(84,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\CirclePhysics\CirclePhysics\CirclePhysics.cpp(96,37): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\CirclePhysics\CirclePhysics\CirclePhysics.cpp(97,37): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\CirclePhysics\CirclePhysics\CirclePhysics.cpp(156,70): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\CirclePhysics\CirclePhysics\CirclePhysics.cpp(156,56): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\CirclePhysics\CirclePhysics\CirclePhysics.cpp(156,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Games\Desktop\CodingStuff\CirclePhysics\CirclePhysics\CirclePhysics.cpp(156,29): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  CirclePhysics.vcxproj -> C:\Users\Games\Desktop\CodingStuff\CirclePhysics\x64\Debug\CirclePhysics.exe
