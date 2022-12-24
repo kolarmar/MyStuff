@@ -16,8 +16,8 @@ C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(614,5
 C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(614,46): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(614,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Generating code
-  Previous IPDB not found, fall back to full compilation.
-C:\Users\Games\Desktop\CodingStuff\olcEngine3D\olcEngine3D\olcEngine3D.cpp(376): warning C4715: 'olcEngine3D::Triangle_ClipAgainstPlane': not all control paths return a value
-  All 629 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  3 of 629 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   olcEngine3D.vcxproj -> C:\Users\Games\Desktop\CodingStuff\olcEngine3D\x64\Release\olcEngine3D.exe
