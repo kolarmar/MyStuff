@@ -1,0 +1,8 @@
+C:\Users\Games\Desktop\CodingStuff\C#\Stack\Stack\bin\Debug\Stack.exe.config
+C:\Users\Games\Desktop\CodingStuff\C#\Stack\Stack\bin\Debug\Stack.exe
+C:\Users\Games\Desktop\CodingStuff\C#\Stack\Stack\bin\Debug\Stack.pdb
+C:\Users\Games\Desktop\CodingStuff\C#\Stack\Stack\obj\Debug\Stack.csproj.AssemblyReference.cache
+C:\Users\Games\Desktop\CodingStuff\C#\Stack\Stack\obj\Debug\Stack.csproj.SuggestedBindingRedirects.cache
+C:\Users\Games\Desktop\CodingStuff\C#\Stack\Stack\obj\Debug\Stack.csproj.CoreCompileInputs.cache
+C:\Users\Games\Desktop\CodingStuff\C#\Stack\Stack\obj\Debug\Stack.exe
+C:\Users\Games\Desktop\CodingStuff\C#\Stack\Stack\obj\Debug\Stack.pdb
