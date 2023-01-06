@@ -11,10 +11,10 @@ namespace Stack
         public int value;
         public Node next;
 
-        public Node(int iValue)
+        public Node(int iValue, Node nNext = null)
         {
             value = iValue;
-            next = null;
+            next = nNext;
         }
     }
 }

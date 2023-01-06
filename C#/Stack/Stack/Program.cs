@@ -10,12 +10,14 @@ namespace Stack
     {
         static void Main(string[] args)
         {
-            Node n1 = new Node(10);
-            Node n2 = new Node(20);
+            StackAsNode stack = new StackAsNode(0);
 
-            n1.next = n2;
+            for(int i = 1; i< 25; i++)
+            {
+                stack.Push(i);
+            }
 
-            Console.WriteLine(n1.next.value);
+            stack.Print();
 
         }
     }
