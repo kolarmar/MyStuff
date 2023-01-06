@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Stack
 {
@@ -24,8 +20,8 @@ namespace Stack
         {
             if (top < size)
             {
+                // Push
                 data[top] = iNum;
-                top++;
             }
             else
             {
@@ -39,29 +35,35 @@ namespace Stack
                 }
 
                 // Update params of new array
-                top = size;
                 size = size * 2;
                 data = newData;
 
                 // Push
                 data[top] = iNum;
-                top++;
             }
+            top++;
 
             return true;
         }
 
         public bool Pop()
         {
-            data[top] = 0;
-            top--;
+            if (size > 0)
+            {
+                data[top] = 0;
+                top--;
+            }
 
             return true;
         }
 
         public int Peak()
         {
-            return data[top];
+            if (size > 0)
+            {
+                return data[top];
+            }
+            return -1;
         }
 
         public bool Print()
