@@ -12,12 +12,13 @@ namespace Stack
         public StackAsArray(int iSize)
         {
             data = new int[iSize];
-            top = 0;
+            top = -1;
             size = iSize;
         }
 
         public bool Push(int iNum)
         {
+            top++;
             if (top < size)
             {
                 // Push
@@ -41,14 +42,13 @@ namespace Stack
                 // Push
                 data[top] = iNum;
             }
-            top++;
 
             return true;
         }
 
         public bool Pop()
         {
-            if (size > 0)
+            if (top >= 0)
             {
                 data[top] = 0;
                 top--;
@@ -59,7 +59,7 @@ namespace Stack
 
         public int Peak()
         {
-            if (size > 0)
+            if (top >= 0)
             {
                 return data[top];
             }
@@ -68,7 +68,7 @@ namespace Stack
 
         public bool Print()
         {
-            for(int i = 0; i < top; i++)
+            for(int i = 0; i <= top; i++)
             {
                 Console.WriteLine(data[i]);
             }

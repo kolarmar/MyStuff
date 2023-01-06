@@ -4,12 +4,13 @@
     {
         static void Main(string[] args)
         {
-            StackAsNode stack = new StackAsNode(0);
+            StackAsArray stack = new StackAsArray(10);
 
-            for(int i = 1; i< 25; i++)
+            for( int i = 0; i < 25; i++ )
             {
                 stack.Push(i);
             }
+            
 
             stack.Print();
 
