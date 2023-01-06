@@ -54,10 +54,10 @@ public:
 
         float fDefaultRad = 8.0f;
 
-        //AddBall(ScreenWidth() * 0.25f, ScreenHeight() * 0.5f,fDefaultRad);
+        AddBall(ScreenWidth() * 0.25f, ScreenHeight() * 0.5f,fDefaultRad);
         //AddBall(ScreenWidth() * 0.75f, ScreenHeight() * 0.5f, fDefaultRad);
 
-        for (int i = 0; i < 10; i++)
+        //for (int i = 0; i < 10; i++)
             AddBall(rand() % ScreenWidth(), rand() % ScreenHeight(), rand() % 16 + 2);
 
 
@@ -75,6 +75,7 @@ public:
         {
             return fabs((x1 - px) * (x1 - px) + (y1 - py) * (y1 - py)) < (r1 * r1);
         };
+
 
         // MOUSE CONTROLS
 
