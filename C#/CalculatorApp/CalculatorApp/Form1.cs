@@ -1,10 +1,13 @@
-using System.Data;
+﻿using System.Data;
 using System.Linq.Expressions;
 
 namespace CalculatorApp
 {
     public partial class Form1 : Form
     {
+        public bool calculated = false;
+
+
         public Form1()
         {
             InitializeComponent();
@@ -12,52 +15,102 @@ namespace CalculatorApp
 
         private void numberZeroButton_Click(object sender, EventArgs e)
         {
+            if (calculated)
+            {
+                mainTextBox.Text = string.Empty;
+            }
             mainTextBox.Text += "0";
+            calculated = false;
         }
 
         private void numberOneButton_Click(object sender, EventArgs e)
         {
+            if (calculated)
+            {
+                mainTextBox.Text = string.Empty;
+            }
             mainTextBox.Text += "1";
+            calculated = false;
         }
 
         private void numberTwoButton_Click(object sender, EventArgs e)
         {
+            if (calculated)
+            {
+                mainTextBox.Text = string.Empty;
+            }
             mainTextBox.Text += "2";
+            calculated = false;
         }
 
         private void numberThreeButton_Click(object sender, EventArgs e)
         {
+            if (calculated)
+            {
+                mainTextBox.Text = string.Empty;
+            }
             mainTextBox.Text += "3";
+            calculated = false;
         }
 
         private void numberFourButton_Click(object sender, EventArgs e)
         {
+            if (calculated)
+            {
+                mainTextBox.Text = string.Empty;
+            }
             mainTextBox.Text += "4";
+            calculated = false;
         }
 
         private void numberFiveButton_Click(object sender, EventArgs e)
         {
+            if (calculated)
+            {
+                mainTextBox.Text = string.Empty;
+            }
             mainTextBox.Text += "5";
+            calculated = false;
         }
 
         private void numberSixButton_Click(object sender, EventArgs e)
         {
+            if (calculated)
+            {
+                mainTextBox.Text = string.Empty;
+            }
             mainTextBox.Text += "6";
+            calculated = false;
         }
 
         private void numberSevenButton_Click(object sender, EventArgs e)
         {
+            if (calculated)
+            {
+                mainTextBox.Text = string.Empty;
+            }
             mainTextBox.Text += "7";
+            calculated = false;
         }
 
         private void numberEightButton_Click(object sender, EventArgs e)
         {
+            if (calculated)
+            {
+                mainTextBox.Text = string.Empty;
+            }
             mainTextBox.Text += "8";
+            calculated = false;
         }
 
         private void numberNineButton_Click(object sender, EventArgs e)
         {
+            if (calculated)
+            {
+                mainTextBox.Text = string.Empty;
+            }
             mainTextBox.Text += "9";
+            calculated = false;
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -84,6 +137,13 @@ namespace CalculatorApp
         {
             mainTextBox.Text += "/";
         }
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            if (mainTextBox.Text != string.Empty)
+            {
+                mainTextBox.Text = mainTextBox.Text.Remove(mainTextBox.Text.Length - 1);
+            }
+        }
 
         private double Evaluate(string expression)
         {
@@ -98,7 +158,45 @@ namespace CalculatorApp
 
         private void equalsButton_Click(object sender, EventArgs e)
         {
-            mainTextBox.Text = Evaluate(mainTextBox.Text).ToString();
+            if (mainTextBox.Text == string.Empty)
+            {
+                return;
+            }
+
+            try
+            {
+                mainTextBox.Text = Evaluate(mainTextBox.Text).ToString();
+                if (mainTextBox.Text == "∞")
+                {
+                    mainTextBox.Text = string.Empty;
+                    errorMessageLabel.Text = "Cannot divide by zero.";
+                    
+                }
+                else
+                {
+                    errorMessageLabel.Text = string.Empty;
+                    calculated = true;
+                }
+            }
+            catch (OverflowException ex)
+            {
+                errorMessageLabel.Text = "Unable to process numbers this big.";
+            }
+            catch
+            {
+                errorMessageLabel.Text = "Syntax Error";
+            }
+            
         }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                equalsButton_Click(sender, e);
+            }
+        }
+
+
     }
 }
