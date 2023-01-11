@@ -1,0 +1,5 @@
+C:\Users\Games\Desktop\CodingStuff\C#\CalculatorApp\CalculatorApp.exe
+C:\Users\Games\Desktop\CodingStuff\C#\CalculatorApp\CalculatorApp.dll
+C:\Users\Games\Desktop\CodingStuff\C#\CalculatorApp\CalculatorApp.deps.json
+C:\Users\Games\Desktop\CodingStuff\C#\CalculatorApp\CalculatorApp.runtimeconfig.json
+C:\Users\Games\Desktop\CodingStuff\C#\CalculatorApp\CalculatorApp.pdb

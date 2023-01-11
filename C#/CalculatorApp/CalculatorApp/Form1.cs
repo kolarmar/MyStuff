@@ -5,7 +5,8 @@ namespace CalculatorApp
 {
     public partial class Form1 : Form
     {
-        public bool calculated = false;
+        private bool calculated = false;
+        private string lastAnswer;
 
 
         public Form1()
@@ -144,6 +145,15 @@ namespace CalculatorApp
                 mainTextBox.Text = mainTextBox.Text.Remove(mainTextBox.Text.Length - 1);
             }
         }
+        private void ansButton_Click(object sender, EventArgs e)
+        {
+            if (calculated)
+            {
+                mainTextBox.Text = string.Empty;
+            }
+            mainTextBox.Text += lastAnswer;
+            calculated = false;
+        }
 
         private double Evaluate(string expression)
         {
@@ -174,6 +184,7 @@ namespace CalculatorApp
                 }
                 else
                 {
+                    lastAnswer = mainTextBox.Text;
                     errorMessageLabel.Text = string.Empty;
                     calculated = true;
                 }

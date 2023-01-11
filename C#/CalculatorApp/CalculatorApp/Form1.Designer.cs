@@ -48,6 +48,7 @@
             this.errorMessageLabel = new System.Windows.Forms.Label();
             this.mainTextBox = new System.Windows.Forms.TextBox();
             this.deleteButton = new System.Windows.Forms.Button();
+            this.ansButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // equalsButton
@@ -239,11 +240,22 @@
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
+            // ansButton
+            // 
+            this.ansButton.Location = new System.Drawing.Point(12, 98);
+            this.ansButton.Name = "ansButton";
+            this.ansButton.Size = new System.Drawing.Size(74, 67);
+            this.ansButton.TabIndex = 33;
+            this.ansButton.Text = "Ans";
+            this.ansButton.UseVisualStyleBackColor = true;
+            this.ansButton.Click += new System.EventHandler(this.ansButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(332, 465);
+            this.Controls.Add(this.ansButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.mainTextBox);
             this.Controls.Add(this.errorMessageLabel);
@@ -298,5 +310,6 @@
         private Label errorMessageLabel;
         private TextBox mainTextBox;
         private Button deleteButton;
+        private Button ansButton;
     }
 }
