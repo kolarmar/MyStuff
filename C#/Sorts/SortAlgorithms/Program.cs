@@ -7,7 +7,7 @@ namespace SortAlgorithms
         static void Main(string[] args)
         {
             // Create random array of given size
-            int[] array = Utility.GetRandArray(20000, 1000000);
+            int[] array = Utility.GetRandArray(1000, 1000000);
 
             // Print out comparison between various sorting algorithms
             SortComparison.CompareTime(array);

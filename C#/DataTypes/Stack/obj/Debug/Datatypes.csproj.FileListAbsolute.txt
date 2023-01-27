@@ -1,0 +1,8 @@
+C:\Users\Games\Desktop\CodingStuff\C#\DataTypes\Stack\obj\Debug\Datatypes.csproj.AssemblyReference.cache
+C:\Users\Games\Desktop\CodingStuff\C#\DataTypes\Stack\obj\Debug\Datatypes.csproj.SuggestedBindingRedirects.cache
+C:\Users\Games\Desktop\CodingStuff\C#\DataTypes\Stack\obj\Debug\Datatypes.csproj.CoreCompileInputs.cache
+C:\Users\Games\Desktop\CodingStuff\C#\DataTypes\Stack\bin\Debug\DataTypes.exe.config
+C:\Users\Games\Desktop\CodingStuff\C#\DataTypes\Stack\bin\Debug\DataTypes.exe
+C:\Users\Games\Desktop\CodingStuff\C#\DataTypes\Stack\bin\Debug\DataTypes.pdb
+C:\Users\Games\Desktop\CodingStuff\C#\DataTypes\Stack\obj\Debug\DataTypes.exe
+C:\Users\Games\Desktop\CodingStuff\C#\DataTypes\Stack\obj\Debug\DataTypes.pdb

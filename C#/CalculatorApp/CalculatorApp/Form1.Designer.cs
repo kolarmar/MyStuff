@@ -224,11 +224,12 @@
             // 
             // mainTextBox
             // 
+            this.mainTextBox.Font = new System.Drawing.Font("Yu Gothic UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.mainTextBox.Location = new System.Drawing.Point(10, 29);
             this.mainTextBox.Multiline = true;
             this.mainTextBox.Name = "mainTextBox";
-            this.mainTextBox.Size = new System.Drawing.Size(311, 63);
-            this.mainTextBox.TabIndex = 31;
+            this.mainTextBox.Size = new System.Drawing.Size(311, 40);
+            this.mainTextBox.TabIndex = 1;
             // 
             // deleteButton
             // 
