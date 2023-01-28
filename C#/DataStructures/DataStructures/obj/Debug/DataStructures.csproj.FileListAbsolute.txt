@@ -1,0 +1,8 @@
+C:\Users\Games\Desktop\CodingStuff\C#\DataStructures\DataStructures\bin\Debug\DataStructures.exe.config
+C:\Users\Games\Desktop\CodingStuff\C#\DataStructures\DataStructures\bin\Debug\DataStructures.exe
+C:\Users\Games\Desktop\CodingStuff\C#\DataStructures\DataStructures\bin\Debug\DataStructures.pdb
+C:\Users\Games\Desktop\CodingStuff\C#\DataStructures\DataStructures\obj\Debug\DataStructures.csproj.AssemblyReference.cache
+C:\Users\Games\Desktop\CodingStuff\C#\DataStructures\DataStructures\obj\Debug\DataStructures.csproj.SuggestedBindingRedirects.cache
+C:\Users\Games\Desktop\CodingStuff\C#\DataStructures\DataStructures\obj\Debug\DataStructures.csproj.CoreCompileInputs.cache
+C:\Users\Games\Desktop\CodingStuff\C#\DataStructures\DataStructures\obj\Debug\DataStructures.exe
+C:\Users\Games\Desktop\CodingStuff\C#\DataStructures\DataStructures\obj\Debug\DataStructures.pdb

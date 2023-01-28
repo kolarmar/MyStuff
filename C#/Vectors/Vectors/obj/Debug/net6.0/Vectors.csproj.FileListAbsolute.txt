@@ -1,0 +1,15 @@
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\bin\Debug\net6.0\Vectors.exe
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\bin\Debug\net6.0\Vectors.deps.json
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\bin\Debug\net6.0\Vectors.runtimeconfig.json
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\bin\Debug\net6.0\Vectors.dll
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\bin\Debug\net6.0\Vectors.pdb
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\obj\Debug\net6.0\Vectors.csproj.AssemblyReference.cache
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\obj\Debug\net6.0\Vectors.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\obj\Debug\net6.0\Vectors.AssemblyInfoInputs.cache
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\obj\Debug\net6.0\Vectors.AssemblyInfo.cs
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\obj\Debug\net6.0\Vectors.csproj.CoreCompileInputs.cache
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\obj\Debug\net6.0\Vectors.dll
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\obj\Debug\net6.0\refint\Vectors.dll
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\obj\Debug\net6.0\Vectors.pdb
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\obj\Debug\net6.0\Vectors.genruntimeconfig.cache
+C:\Users\Games\Desktop\CodingStuff\C#\Vectors\Vectors\obj\Debug\net6.0\ref\Vectors.dll
