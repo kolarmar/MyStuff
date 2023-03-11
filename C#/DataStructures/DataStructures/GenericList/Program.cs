@@ -90,19 +90,70 @@ namespace GenericList
             Size++;
         }
 
-        public void CleanFromStart()
+        public void ClearFromStart()
         {
             if(Empty) throw new InvalidOperationException(
-                "Cannot clean first element when list is empty");
+                "Cannot clear first element when list is empty");
 
             head = head.Next;
             Size--;
         }
 
-        public void Clean()
+        public void ClearAll()
         {
             head = end;
             Size = 0;
+        }
+
+        public bool Find(T search, out IEnumerator<T> enumerator)
+        {
+            enumerator = Enumerator.ForNull;
+
+            if (Empty) return false;
+
+            for(var item = head; item != end; item = item.Next)
+            {
+                if(item.Data.Equals(search))
+                {
+                    enumerator = new Enumerator(this, item);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void ChangeValue(IEnumerator<T> pointOnItem, T newValue)
+        {
+            ((Enumerator)pointOnItem).CurrentNode.Data = newValue;
+        }
+
+        public void PutBehind(IEnumerator<T> pointOnItem, T newValue)
+        {
+            Node item = ((Enumerator)pointOnItem).CurrentNode;
+            item.Next = new Node(newValue);
+            Size++;
+        }
+
+        public void ClearNode(IEnumerator<T> pointOnItem)
+        {
+            Node deletedItem = ((Enumerator)pointOnItem).CurrentNode;
+
+            if(deletedItem == head)
+            {
+                head = head.Next;
+            }
+            else if(((Enumerator)pointOnItem).Last)
+            {
+                end = deletedItem;
+                end.Next = null;
+            }
+            else
+            {
+                deletedItem.Data = deletedItem.Next.Data;
+                deletedItem.Next = deletedItem.Next.Next;
+            }
+
+            Size--;
         }
 
         public IEnumerator<T> GetEnumerator() => new Enumerator(this);
@@ -123,9 +174,10 @@ namespace GenericList
         static void Main(string[] args)
         {
             List<int> list= new List<int>(1,2,3,4,5);
-
-            list.AddToStart(0);
-            list.AddToEnd(6);
+            IEnumerator<int> enumerator;
+            list.Find(2, out enumerator);
+            enumerator.MoveNext();
+            list.ChangeValue(enumerator, 14);
 
             Print<int>(list);
 
