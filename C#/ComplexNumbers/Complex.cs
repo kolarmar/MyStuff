@@ -17,6 +17,9 @@ namespace ComplexNumbers
 
         public Complex Conjugate() => (Re, -Im);
 
+        public override string ToString()
+        => "(" + Re + ", " + Im + "i" + ")";
+
 
         // OPERATORS
 
@@ -27,6 +30,13 @@ namespace ComplexNumbers
         // Tuple to complex
         public static implicit operator Complex((double re, double im) t)
         => new Complex(t.re, t.im);
+
+        // Real to complex
+        public static implicit operator Complex(double re) => (re, 0);
+
+        // Complex to real
+        public static explicit operator double(Complex a)
+        => (a.Im == 0) ? a.Re : throw new ArgumentException("Imaginary part is not zero");
 
         // Unary operators
         public static Complex operator +(Complex a) => a;
@@ -43,8 +53,21 @@ namespace ComplexNumbers
         public static Complex operator /(Complex a, double num)
         => (num != 0) ? (a.Re / num, a.Im / num) : throw new DivideByZeroException();
 
+        public static Complex operator *(Complex a, Complex b)
+        => (a.Re * b.Re - a.Im * b.Im, a.Re * b.Im + a.Im * b.Re);
 
+        public static Complex operator /(Complex a, Complex b)
+        {
+            Complex conjugate = b.Conjugate();
+            return (a * conjugate) / (b * conjugate).Re;
+        }
 
+        // Comparisons
+        public static bool operator ==(Complex a, Complex b)
+        => (a.Re == b.Re) && (a.Im == b.Im);
+
+        public static bool operator !=(Complex a, Complex b)
+        => !(a == b);
 
     }
 }
