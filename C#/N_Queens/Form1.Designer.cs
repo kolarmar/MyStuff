@@ -73,6 +73,7 @@
             this.NewGameMenu.Name = "NewGameMenu";
             this.NewGameMenu.Size = new System.Drawing.Size(228, 26);
             this.NewGameMenu.Text = "New game";
+            this.NewGameMenu.Click += new System.EventHandler(this.NewGameMenu_Click);
             // 
             // NextTurnMenu
             // 
@@ -80,12 +81,14 @@
             this.NextTurnMenu.Name = "NextTurnMenu";
             this.NextTurnMenu.Size = new System.Drawing.Size(228, 26);
             this.NextTurnMenu.Text = "Next turn";
+            this.NextTurnMenu.Click += new System.EventHandler(this.NextTurnMenu_Click);
             // 
             // AllSolutionsMenu
             // 
             this.AllSolutionsMenu.Name = "AllSolutionsMenu";
             this.AllSolutionsMenu.Size = new System.Drawing.Size(228, 26);
             this.AllSolutionsMenu.Text = "All solutions number";
+            this.AllSolutionsMenu.Click += new System.EventHandler(this.AllSolutionsMenu_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -116,6 +119,7 @@
             this.NextButton.TabIndex = 1;
             this.NextButton.Text = "Next Solution";
             this.NextButton.UseVisualStyleBackColor = true;
+            this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
             // 
             // NumberPicker
             // 
@@ -155,10 +159,12 @@
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.MainPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.MainPanel.Location = new System.Drawing.Point(12, 42);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(392, 392);
             this.MainPanel.TabIndex = 4;
+            this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.MainPanel_Paint);
             // 
             // MainForm
             // 
