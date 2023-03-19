@@ -1,0 +1,17 @@
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\bin\Debug\net6.0-windows\N_Queens.exe
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\bin\Debug\net6.0-windows\N_Queens.deps.json
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\bin\Debug\net6.0-windows\N_Queens.runtimeconfig.json
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\bin\Debug\net6.0-windows\N_Queens.dll
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\bin\Debug\net6.0-windows\N_Queens.pdb
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\obj\Debug\net6.0-windows\N_Queens.csproj.AssemblyReference.cache
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\obj\Debug\net6.0-windows\N_Queens.MainForm.resources
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\obj\Debug\net6.0-windows\N_Queens.csproj.GenerateResource.cache
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\obj\Debug\net6.0-windows\N_Queens.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\obj\Debug\net6.0-windows\N_Queens.AssemblyInfoInputs.cache
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\obj\Debug\net6.0-windows\N_Queens.AssemblyInfo.cs
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\obj\Debug\net6.0-windows\N_Queens.csproj.CoreCompileInputs.cache
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\obj\Debug\net6.0-windows\N_Queens.dll
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\obj\Debug\net6.0-windows\refint\N_Queens.dll
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\obj\Debug\net6.0-windows\N_Queens.pdb
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\obj\Debug\net6.0-windows\N_Queens.genruntimeconfig.cache
+C:\Users\Games\Desktop\CodingStuff\C#\N_Queens\obj\Debug\net6.0-windows\ref\N_Queens.dll
