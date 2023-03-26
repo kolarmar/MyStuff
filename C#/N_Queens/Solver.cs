@@ -35,6 +35,7 @@ namespace N_Queens
 
         private bool IsSafe(int row, int col)
         {
+            Application.DoEvents();
             if (col == 0) return true;
 
             var (returnValue, j) = (true, 0);

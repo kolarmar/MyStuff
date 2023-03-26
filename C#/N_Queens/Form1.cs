@@ -1,5 +1,8 @@
 namespace N_Queens
 {
+    using NPR = N_Queens.Properties.Resources;
+
+    public enum QueenSymbol { Circle, Cross, Rectangle };
     public partial class MainForm : Form
     {
         private int queens;
@@ -10,6 +13,13 @@ namespace N_Queens
         {
             InitializeComponent();
         }
+
+        private void UseResources()
+        {
+            GameMenu.Text = NPR.Game;
+            NewGameMenu.Text = NPR.New_game;
+        }
+
         private void StartSolver()
         {
             queens = (int)NumberPicker.Value;
@@ -74,12 +84,31 @@ namespace N_Queens
 
         private void AllSolutionsMenu_Click(object sender, EventArgs e)
         {
+            DisableForm();
             int queensTemp = (int)NumberPicker.Value;
             Solver solverTemp = new Solver(queensTemp);
             MessageBox.Show($"There are {solverTemp.Solutions.Count()} solutions" +
                 $" in total", "All solutions",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+            EnableForm();
+        }
+
+        private void DisableForm()
+        {
+            (NextButton.Enabled, NextTurnMenu.Enabled,
+             NumberPicker.Enabled, Menu.Enabled)
+                = (false, false, false, false);
+        }
+
+        private void EnableForm()
+        {
+            (NumberPicker.Enabled, Menu.Enabled) = (true, true);
+
+            if (solver != null)
+            {
+                (NextButton.Enabled, NextTurnMenu.Enabled) = (true, true);
+            }
         }
 
         private void MainPanel_Paint(object sender, PaintEventArgs e)
@@ -127,6 +156,11 @@ namespace N_Queens
                                 solution[i] * deltaY + deltaY / 6,
                                 2 * deltaX / 3, 2 * deltaY / 3);
             }
+        }
+
+        private void MainPanel_Resize(object sender, EventArgs e)
+        {
+            MainPanel.Invalidate();
         }
     }
 }

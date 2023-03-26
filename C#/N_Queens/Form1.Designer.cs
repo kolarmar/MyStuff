@@ -165,6 +165,7 @@
             this.MainPanel.Size = new System.Drawing.Size(392, 392);
             this.MainPanel.TabIndex = 4;
             this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.MainPanel_Paint);
+            this.MainPanel.Resize += new System.EventHandler(this.MainPanel_Resize);
             // 
             // MainForm
             // 
