@@ -26,7 +26,7 @@
 
         static void Main(string[] args)
         {
-            int[] array = {1, 3, 6, 7, 8, 11, 12};
+            int[] array = {1, 3, 6, 7, 8, 11, 15};
             int result = BinSearch(array, 0, 0, array.Length - 1);
             Console.WriteLine(result);
         }
