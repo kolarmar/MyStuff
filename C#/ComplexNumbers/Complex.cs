@@ -69,5 +69,14 @@ namespace ComplexNumbers
         public static bool operator !=(Complex a, Complex b)
         => !(a == b);
 
+        public override bool Equals(object? obj)
+        {
+            return obj is Complex && Equals((Complex)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (int)Re.GetHashCode();
+        }
     }
 }

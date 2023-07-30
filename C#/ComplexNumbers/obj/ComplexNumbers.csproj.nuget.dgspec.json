@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Games\\Desktop\\CodingStuff\\C#\\ComplexNumbers\\ComplexNumbers.csproj": {}
+    "C:\\MyCode\\MyStuff\\C#\\ComplexNumbers\\ComplexNumbers.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Games\\Desktop\\CodingStuff\\C#\\ComplexNumbers\\ComplexNumbers.csproj": {
+    "C:\\MyCode\\MyStuff\\C#\\ComplexNumbers\\ComplexNumbers.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Games\\Desktop\\CodingStuff\\C#\\ComplexNumbers\\ComplexNumbers.csproj",
+        "projectUniqueName": "C:\\MyCode\\MyStuff\\C#\\ComplexNumbers\\ComplexNumbers.csproj",
         "projectName": "ComplexNumbers",
-        "projectPath": "C:\\Users\\Games\\Desktop\\CodingStuff\\C#\\ComplexNumbers\\ComplexNumbers.csproj",
-        "packagesPath": "C:\\Users\\Games\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Games\\Desktop\\CodingStuff\\C#\\ComplexNumbers\\obj\\",
+        "projectPath": "C:\\MyCode\\MyStuff\\C#\\ComplexNumbers\\ComplexNumbers.csproj",
+        "packagesPath": "C:\\Users\\DELL1\\.nuget\\packages\\",
+        "outputPath": "C:\\MyCode\\MyStuff\\C#\\ComplexNumbers\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Games\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DELL1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }
