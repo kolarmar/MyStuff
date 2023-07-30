@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\C#",
+    "\\C#\\BinarySearch",
+    "\\C#\\BinarySearch\\BinarySearch"
   ],
-  "SelectedNode": "\\DataStructures.sln",
+  "SelectedNode": "\\C#\\BinarySearch\\BinarySearch\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

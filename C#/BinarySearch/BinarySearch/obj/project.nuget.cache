@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PzbKHOdogm4a5qh4EwyLyufzQHfRBr9TKtdhIPKc49kUW33m9ghZkW1xaTvwZUVaN7lzGtzJKKSDqrrsZH9GEA==",
+  "dgSpecHash": "JKsO3p1QX7fpqJxkEzVXDg/gcWLrhbGgiGT5SNldqLwuFknGz8ctXwb1jbisFE3Wm2/m5oiYmCcr5vVHkJ0Lfw==",
   "success": true,
-  "projectFilePath": "C:\\MyCode\\C#\\BinarySearch\\BinarySearch\\BinarySearch.csproj",
+  "projectFilePath": "C:\\MyCode\\MyStuff\\C#\\BinarySearch\\BinarySearch\\BinarySearch.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

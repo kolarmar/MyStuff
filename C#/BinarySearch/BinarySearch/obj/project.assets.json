@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\MyCode\\C#\\BinarySearch\\BinarySearch\\BinarySearch.csproj",
+      "projectUniqueName": "C:\\MyCode\\MyStuff\\C#\\BinarySearch\\BinarySearch\\BinarySearch.csproj",
       "projectName": "BinarySearch",
-      "projectPath": "C:\\MyCode\\C#\\BinarySearch\\BinarySearch\\BinarySearch.csproj",
+      "projectPath": "C:\\MyCode\\MyStuff\\C#\\BinarySearch\\BinarySearch\\BinarySearch.csproj",
       "packagesPath": "C:\\Users\\DELL1\\.nuget\\packages\\",
-      "outputPath": "C:\\MyCode\\C#\\BinarySearch\\BinarySearch\\obj\\",
+      "outputPath": "C:\\MyCode\\MyStuff\\C#\\BinarySearch\\BinarySearch\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DELL1\\AppData\\Roaming\\NuGet\\NuGet.Config",
