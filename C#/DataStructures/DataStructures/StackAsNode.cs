@@ -2,20 +2,20 @@
 
 namespace DataStructures
 {
-    internal class StackAsNode
+    internal class StackAsNode<T>
     {
-        private Node topNode;
+        private Node<T> topNode;
         private int size;
 
-        public StackAsNode(int iNum) 
+        public StackAsNode() 
         {
-            topNode = new Node(iNum);
-            size = 1;
+            topNode = null;
+            size = 0;
         }
 
-        public void Push(int iNum)
+        public void Push(T item)
         {
-            Node newNode = new Node(iNum, topNode);
+            Node<T> newNode = new Node<T>(item, topNode);
             topNode = newNode;
             size++;
         }
@@ -24,27 +24,32 @@ namespace DataStructures
         {
             if (topNode != null)
             {
-                topNode = topNode.next;
+                topNode = topNode.child;
                 size--;
             }
         }
 
-        public int Peak()
+        public T Peak()
         {
-            if (topNode != null) return topNode.value;
+            if (topNode != null) return topNode.data;
 
-            else return -1;
+            else return default(T);
+        }
+
+        public bool IsEmpty()
+        {
+            return topNode == null;
         }
 
         public void Print()
         {
             // Creates a copy of topNode and iterates until the last node
-            Node newTop = topNode;
+            Node<T> newTop = topNode;
 
             for (int i = 0; i < size; i++)
             {
-                Console.Write(newTop.value + " ");
-                newTop = newTop.next;
+                Console.Write(newTop.data + " ");
+                newTop = newTop.child;
             }
 
             Console.WriteLine();

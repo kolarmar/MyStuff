@@ -2,28 +2,28 @@
 
 namespace DataStructures
 {
-    internal class QueueAsNode
+    internal class QueueAsNode<T>
     {
-        private Node topNode;
+        private Node<T> topNode;
         private int size;
 
-        public QueueAsNode(int iNum)
+        public QueueAsNode()
         {
-            topNode = new Node(iNum);
-            size = 1;
+            topNode = null;
+            size = 0;
         }
 
-        public void Push(int iNum)
+        public void Push(T item)
         {
             if (size > 0)
             {
-                Node newNode = new Node(iNum, topNode);
+                Node<T> newNode = new Node<T>(item, topNode);
                 topNode = newNode;
                 size++;
             }
             if (size == 0)
             {
-                topNode = new Node(iNum);
+                topNode = new Node<T>(item);
                 size = 1;
             }
         }
@@ -33,30 +33,30 @@ namespace DataStructures
             if (size > 0) size--;
         }
 
-        public int Peak()
+        public T Peak()
         {
-            if (size <= 0) return -1;
+            if (size == 0) return default(T);
 
-            Node newTop = topNode;
+            Node<T> newTop = topNode;
             for(int i = 0; i < size - 1; i++)
             {
-                newTop = newTop.next;
+                newTop = newTop.child;
             }
-            return newTop.value;
+            return newTop.data;
         }
 
         public void Print()
         {
             // Creates an array of values from the queue and prints them
-            int[] printArray = new int[size];
-            Node newTop = topNode;
+            T[] printArray = new T[size];
+            Node<T> newTop = topNode;
 
             if (size < 1) return; 
 
             for(int i = 0; i < size; i++)
             {
-                printArray[i] = newTop.value;
-                newTop = newTop.next;
+                printArray[i] = newTop.data;
+                newTop = newTop.child;
             }
 
             for (int i = 0; i < size; i++)

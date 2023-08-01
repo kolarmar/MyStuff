@@ -4,9 +4,9 @@ namespace DataStructures
 {
     internal class StackAsArray
     {
-        public int[] data;
-        public int top;
-        public int size;
+        protected int[] data;
+        protected int top;
+        protected int size;
 
 
         public StackAsArray(int iSize)

@@ -6,16 +6,24 @@ using System.Threading.Tasks;
 
 namespace DataStructures
 {
-    internal class TreeNode
+    internal class TreeNode<T>
     {
-        public int value;
-        public TreeNode leftChild, rightChild;
+        private T data;
+        private TreeNode<T> leftChild, rightChild;
 
-        public TreeNode(int value, TreeNode leftChild = null, TreeNode rightChild = null)
+        public TreeNode(T _data)
         {
-            this.value = value;
-            this.leftChild = leftChild;
-            this.rightChild = rightChild;
+            SetData(_data);
+            leftChild = null;
+            rightChild = null;
         }
+
+        public void SetData(T _data) { this.data = _data; }
+        public T GetData() { return this.data; }
+        public void SetLeftChild(TreeNode<T> _child) { this.leftChild = _child;}
+        public void SetRightChild(TreeNode<T> _child) { this.rightChild = _child;}
+        public TreeNode<T> GetLeftChild() {  return this.leftChild; }
+        public TreeNode<T> GetRightChild() {  return this.rightChild; }
+
     }
 }

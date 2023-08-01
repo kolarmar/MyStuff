@@ -1,14 +1,14 @@
 ﻿namespace DataStructures
 {
-    internal class Node
+    internal class Node<T>
     {
-        public int value;
-        public Node next;
+        public T data;
+        public Node<T> child;
 
-        public Node(int iValue, Node nNext = null)
+        public Node(T _data, Node<T> _child = null)
         {
-            value = iValue;
-            next = nNext;
+            this.data = _data;
+            this.child = _child;
         }
     }
 }
