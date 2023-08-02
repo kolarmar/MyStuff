@@ -6,3 +6,11 @@ C:\Users\Games\Desktop\CodingStuff\C#\DataStructures\DataStructures\obj\Debug\Da
 C:\Users\Games\Desktop\CodingStuff\C#\DataStructures\DataStructures\obj\Debug\DataStructures.csproj.CoreCompileInputs.cache
 C:\Users\Games\Desktop\CodingStuff\C#\DataStructures\DataStructures\obj\Debug\DataStructures.exe
 C:\Users\Games\Desktop\CodingStuff\C#\DataStructures\DataStructures\obj\Debug\DataStructures.pdb
+C:\MyCode\MyStuff\C#\DataStructures\DataStructures\bin\Debug\DataStructures.exe.config
+C:\MyCode\MyStuff\C#\DataStructures\DataStructures\bin\Debug\DataStructures.exe
+C:\MyCode\MyStuff\C#\DataStructures\DataStructures\bin\Debug\DataStructures.pdb
+C:\MyCode\MyStuff\C#\DataStructures\DataStructures\obj\Debug\DataStructures.csproj.AssemblyReference.cache
+C:\MyCode\MyStuff\C#\DataStructures\DataStructures\obj\Debug\DataStructures.csproj.SuggestedBindingRedirects.cache
+C:\MyCode\MyStuff\C#\DataStructures\DataStructures\obj\Debug\DataStructures.csproj.CoreCompileInputs.cache
+C:\MyCode\MyStuff\C#\DataStructures\DataStructures\obj\Debug\DataStructures.exe
+C:\MyCode\MyStuff\C#\DataStructures\DataStructures\obj\Debug\DataStructures.pdb

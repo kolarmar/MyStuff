@@ -45,6 +45,11 @@ namespace DataStructures
             return newTop.data;
         }
 
+        public bool IsEmpty()
+        {
+            return size == 0;
+        }
+
         public void Print()
         {
             // Creates an array of values from the queue and prints them
