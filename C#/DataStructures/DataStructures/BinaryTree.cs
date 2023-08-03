@@ -31,7 +31,7 @@ namespace DataStructures
             QueueAsNode<BinaryNode<T>> queue = new QueueAsNode<BinaryNode<T>>();
             queue.Push(root);
 
-            while(!queue.IsEmpty())
+            while(!queue.Empty)
             {
                 BinaryNode<T> current = queue.Peak();
                 queue.Pop();
@@ -87,7 +87,7 @@ namespace DataStructures
             T[] values = new T[maxNodes];
 
             queue.Push(root);
-            for(int i = 0; !queue.IsEmpty(); i++)
+            for(int i = 0; !queue.Empty; i++)
             {
                 BinaryNode<T> current = queue.Peak();
                 queue.Pop();

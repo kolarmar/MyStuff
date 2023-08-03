@@ -2,7 +2,7 @@
 
 namespace DataStructures
 {
-    internal class StackAsNode<T>
+    class StackAsNode<T>
     {
         private Node<T> head;
 
@@ -23,7 +23,7 @@ namespace DataStructures
 
         public void Pop()
         {
-            if (head != null)
+            if (!Empty)
             {
                 head = head.GetChild();
                 Size--;
@@ -32,7 +32,7 @@ namespace DataStructures
 
         public T Peak()
         {
-            if (head != null)
+            if (!Empty)
             {
                 return head.GetData();
             }

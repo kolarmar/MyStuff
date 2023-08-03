@@ -19,10 +19,10 @@
     {
         private Node<T> child;
 
-        public Node(T _data = default(T), BaseNode<T> _child = null)
+        public Node(T _data = default(T), Node<T> _child = null)
         {
             SetData(_data);
-            SetChild((Node<T>)_child);
+            SetChild(_child);
         }
 
         public void SetChild(Node<T> _child)
@@ -41,11 +41,11 @@
         private BinaryNode<T> childLeft;
         private BinaryNode<T> childRight;
 
-        public BinaryNode(T _data = default(T), BaseNode<T> _childLeft = null, BaseNode<T> _childRight = null)
+        public BinaryNode(T _data = default(T), BinaryNode<T> _childLeft = null, BinaryNode<T> _childRight = null)
         {
             SetData(_data);
-            SetLeftChild((BinaryNode<T>)_childLeft);
-            SetRightChild((BinaryNode<T>)_childRight);
+            SetLeftChild(_childLeft);
+            SetRightChild(_childRight);
         }
 
         public void SetLeftChild(BinaryNode<T> _child)

@@ -51,7 +51,6 @@
     <Compile Include="QueueAsNode.cs" />
     <Compile Include="StackAsArray.cs" />
     <Compile Include="StackAsNode.cs" />
-    <Compile Include="TreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

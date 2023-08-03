@@ -2,71 +2,68 @@
 
 namespace DataStructures
 {
-    internal class QueueAsNode<T>
+    class QueueAsNode<T>
     {
-        private Node<T> topNode;
-        private int size;
+        // This queue uses binary nodes to for a doubly linked list, 
+        // left child is the direction from head to end,
+        // right child is the direction from end to head.
+
+        private BinaryNode<T> head;
+        private BinaryNode<T> end;
 
         public QueueAsNode()
         {
-            topNode = null;
-            size = 0;
+            head = null;
+            end = null;
+            Size = 0;
         }
+
+        public bool Empty => head == null;
+        public int Size { get; private set; } = 0;
 
         public void Push(T item)
         {
-            if (size > 0)
+            if (Empty)
             {
-                Node<T> newNode = new Node<T>(item, topNode);
-                topNode = newNode;
-                size++;
+                head = end = new BinaryNode<T>(item);
             }
-            if (size == 0)
+            else
             {
-                topNode = new Node<T>(item);
-                size = 1;
+                BinaryNode<T> temp = new BinaryNode<T>(item, head);
+                head.SetRightChild(temp);
+                head = temp;
             }
+
+            Size++;
         }
 
         public void Pop()
         {
-            if (size > 0) size--;
+            if (!Empty)
+            {
+                // Check if queue has only 1 element
+                if (head == end)
+                {
+                    head = end = null;
+                }
+                else
+                {
+                    end = end.GetRightChild();
+                    end.SetLeftChild(null);
+                }
+            }
         }
 
         public T Peak()
         {
-            if (size == 0) return default(T);
-
-            Node<T> newTop = topNode;
-            for(int i = 0; i < size - 1; i++)
-            {
-                newTop = newTop.child;
-            }
-            return newTop.data;
-        }
-
-        public bool IsEmpty()
-        {
-            return size == 0;
+            return end.GetData();
         }
 
         public void Print()
         {
-            // Creates an array of values from the queue and prints them
-            T[] printArray = new T[size];
-            Node<T> newTop = topNode;
-
-            if (size < 1) return; 
-
-            for(int i = 0; i < size; i++)
+            for(BinaryNode<T> newEnd = end; end != head; end = end.GetRightChild())
             {
-                printArray[i] = newTop.data;
-                newTop = newTop.child;
-            }
-
-            for (int i = 0; i < size; i++)
-            {
-                Console.Write(printArray[size - i - 1] + " ");
+                Console.Write(end.GetData().ToString() + " ");
             }
 
             Console.WriteLine();
