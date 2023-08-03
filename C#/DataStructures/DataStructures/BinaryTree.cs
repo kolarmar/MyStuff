@@ -9,7 +9,7 @@ namespace DataStructures
 {
     internal class BinaryTree<T>
     {
-        private TreeNode<T> root;
+        private BinaryNode<T> root;
         private int maxNodes = 32;
 
         public BinaryTree()
@@ -23,17 +23,17 @@ namespace DataStructures
 
             if (root == null)
             {
-                root = new TreeNode<T>(item);
+                root = new BinaryNode<T>(item);
                 return;
             }
 
-            TreeNode<T> nodeToAdd = new TreeNode<T>(item);
-            QueueAsNode<TreeNode<T>> queue = new QueueAsNode<TreeNode<T>>();
+            BinaryNode<T> nodeToAdd = new BinaryNode<T>(item);
+            QueueAsNode<BinaryNode<T>> queue = new QueueAsNode<BinaryNode<T>>();
             queue.Push(root);
 
             while(!queue.IsEmpty())
             {
-                TreeNode<T> current = queue.Peak();
+                BinaryNode<T> current = queue.Peak();
                 queue.Pop();
 
                 if (current.GetLeftChild() == null)
@@ -54,14 +54,14 @@ namespace DataStructures
 
         public T[] DepthFirstValues()
         {
-            StackAsNode<TreeNode<T>> stack = new StackAsNode<TreeNode<T>>();
+            StackAsNode<BinaryNode<T>> stack = new StackAsNode<BinaryNode<T>>();
             T[] values = new T[maxNodes];
 
             stack.Push(root);
-            for(int i = 0; !stack.IsEmpty(); i++)
+            for(int i = 0; !stack.Empty; i++)
             {
                 // Take the top node of the stack
-                TreeNode<T> current = stack.Peak();
+                BinaryNode<T> current = stack.Peak();
                 stack.Pop();
 
                 // Add the value of current to result array
@@ -83,13 +83,13 @@ namespace DataStructures
 
         public T[] BreadthFirstValues()
         {
-            QueueAsNode<TreeNode<T>> queue = new QueueAsNode<TreeNode<T>>();
+            QueueAsNode<BinaryNode<T>> queue = new QueueAsNode<BinaryNode<T>>();
             T[] values = new T[maxNodes];
 
             queue.Push(root);
             for(int i = 0; !queue.IsEmpty(); i++)
             {
-                TreeNode<T> current = queue.Peak();
+                BinaryNode<T> current = queue.Peak();
                 queue.Pop();
 
                 values[i] = current.GetData();
