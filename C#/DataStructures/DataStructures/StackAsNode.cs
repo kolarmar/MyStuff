@@ -4,52 +4,51 @@ namespace DataStructures
 {
     internal class StackAsNode<T>
     {
-        private Node<T> topNode;
-        private int size;
+        private Node<T> head;
 
         public StackAsNode() 
         {
-            topNode = null;
-            size = 0;
+            head = null;
+            Size = 0;
         }
+
+        public bool Empty => head == null;
+        public int Size { get; private set; } = 0;
 
         public void Push(T item)
         {
-            Node<T> newNode = new Node<T>(item, topNode);
-            topNode = newNode;
-            size++;
+            head = new Node<T>(item, head);
+            Size++;
         }
 
         public void Pop()
         {
-            if (topNode != null)
+            if (head != null)
             {
-                topNode = topNode.child;
-                size--;
+                head = head.GetChild();
+                Size--;
             }
         }
 
         public T Peak()
         {
-            if (topNode != null) return topNode.data;
+            if (head != null)
+            {
+                return head.GetData();
+            }
 
-            else return default(T);
-        }
-
-        public bool IsEmpty()
-        {
-            return topNode == null;
+            else throw new InvalidOperationException("Cannot peak at stack when empty.");
         }
 
         public void Print()
         {
-            // Creates a copy of topNode and iterates until the last node
-            Node<T> newTop = topNode;
+            // Creates a copy and iterates until the last node
+            Node<T> newHead = head;
 
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < Size; i++)
             {
-                Console.Write(newTop.data + " ");
-                newTop = newTop.child;
+                Console.Write(newHead.GetData() + " ");
+                newHead = newHead.GetChild();
             }
 
             Console.WriteLine();
