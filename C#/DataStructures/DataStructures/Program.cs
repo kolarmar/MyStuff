@@ -14,15 +14,7 @@ namespace DataStructures
             tree.Add("e");
             tree.Add("f");
 
-            string[] list = tree.DepthFirstValues();
-
-            foreach (string value in list)
-            {
-                if (value != null)
-                {
-                    Console.Write(value);
-                }
-            }
+            Console.WriteLine(tree.ContainsRecursive("a"));
 
             Console.ReadLine();
         }
