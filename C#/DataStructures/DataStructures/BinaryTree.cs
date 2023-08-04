@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,13 +17,14 @@ namespace DataStructures
             root = null;
         }
 
+        public bool Empty => root == null;
         public int Size { get; private set; }
 
         public void Add(T item)
         {
             // Balanced adding
 
-            if (root == null)
+            if (Empty)
             {
                 root = new BinaryNode<T>(item);
                 Size++;
@@ -61,6 +63,8 @@ namespace DataStructures
             StackAsNode<BinaryNode<T>> stack = new StackAsNode<BinaryNode<T>>();
             T[] values = new T[Size];
 
+            if (Empty) return values;
+
             stack.Push(root);
 
             for(int i = 0; !stack.Empty; i++)
@@ -91,6 +95,8 @@ namespace DataStructures
             QueueAsNode<BinaryNode<T>> queue = new QueueAsNode<BinaryNode<T>>();
             T[] values = new T[Size];
 
+            if(Empty) return values;
+
             queue.Push(root);
 
             for(int i = 0; !queue.Empty; i++)
@@ -117,6 +123,8 @@ namespace DataStructures
         {
             // Finds whether the target is contained in the tree,
             // uses breadth first traversal.
+
+            if (Empty) return false;
 
             QueueAsNode<BinaryNode<T>> queue = new QueueAsNode<BinaryNode<T>>();
             queue.Push(root);
@@ -151,12 +159,81 @@ namespace DataStructures
 
         private bool ContainsRecursiveInner(T target, BinaryNode<T> root)
         {
-            if(root == null) return false;
+            if(Empty) return false;
 
             if(root.GetData().Equals(target)) return true;
 
             return ContainsRecursiveInner(target, root.GetLeftChild()) || ContainsRecursiveInner(target, root.GetRightChild());
         }
+
+        public int IntegerSum()
+        {
+            // Uses depth first traveral and adds integer values to a sum.
+
+            int sum = 0;
+
+            // Check if the tree contains integers.
+            if (typeof(T) != typeof(int)) return sum;
+
+            if (Empty) return sum;
+
+            StackAsNode<BinaryNode<T>> stack = new StackAsNode<BinaryNode<T>>();
+            stack.Push(root);
+
+            while (!stack.Empty)
+            {
+                BinaryNode<T> current = stack.Peak();
+                stack.Pop();
+                sum += Convert.ToInt32(current.GetData());
+
+                if(current.GetRightChild() != null)
+                {
+                    stack.Push(current.GetRightChild());
+                }
+                if(current.GetLeftChild() != null)
+                {
+                    stack.Push(current.GetLeftChild());
+                }
+            }
+
+            return sum;
+        }
+
+        public int IntegerMin()
+        {
+            if (typeof(T) != typeof(int))
+            {
+                throw new InvalidOperationException("IntegerMin can only be applied on tree with integer elements.");
+            }
+
+            int min = Convert.ToInt32(root.GetData());
+            StackAsNode<BinaryNode<T>> stack = new StackAsNode<BinaryNode<T>>();
+            stack.Push(root);
+
+            while (!stack.Empty)
+            {
+                BinaryNode<T> current = stack.Peak();
+                stack.Pop();
+                int currentInteger = Convert.ToInt32(current.GetData());
+
+                if (currentInteger < min)
+                {
+                    min = currentInteger;
+                }
+
+                if(current.GetRightChild() != null)
+                {
+                    stack.Push(current.GetRightChild());
+                }
+                if (current.GetLeftChild() != null)
+                {
+                    stack.Push(current.GetLeftChild());
+                }
+            }
+
+            return min;
+        }
+
 
     }
 }
