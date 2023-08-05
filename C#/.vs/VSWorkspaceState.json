@@ -3,8 +3,9 @@
     "",
     "\\DataStructures",
     "\\DataStructures\\DataStructures",
-    "\\DataStructures\\DataStructures\\GenericList"
+    "\\DataStructures\\DataStructures\\GenericList",
+    "\\DataStructures\\DataStructures\\Properties"
   ],
-  "SelectedNode": "\\DataStructures\\DataStructures\\Program.cs",
+  "SelectedNode": "\\DataStructures\\DataStructures.sln",
   "PreviewInSolutionExplorer": true
 }

@@ -10,33 +10,33 @@ namespace Vectors
     internal class Vec3d
     {
         public float x, y, z;
-        public float size;
+        public float Size => (float)Math.Sqrt(x * x + y * y + z * z);
 
         public Vec3d(float x = 0, float y = 0, float z = 0)
         {
             this.x = x;
             this.y = y;
             this.z = z;
-            this.size = Size();
-        }
-
-        public float Size()
-        {
-            return (float)Math.Sqrt(this.x*this.x + this.y * this.y + this.z * this.z);
         }
 
         public void Normalize()
         {
-            if (this.size != 0)
+            if (Size != 0)
             {
-                this.x /= this.size;
-                this.y /= this.size;
-                this.z /= this.size;
-                this.size = Size();
+                float tempSize = Size;
+                x /= tempSize;
+                y /= tempSize;
+                z /= tempSize;
             }
         }
 
         // VECTOR OPERATORS
+
+        // Negative
+        public static Vec3d operator -(Vec3d v)
+        {
+            return new Vec3d(-v.x, -v.y);
+        }
 
         // Add
         public static Vec3d operator +(Vec3d v1, Vec3d v2)
@@ -70,6 +70,12 @@ namespace Vectors
                             v1.z*v2.x - v1.x*v2.z,
                             v1.x*v2.y - v1.y*v2.x
                             );
+        }
+
+        // Convert to 2d
+        public static explicit operator Vec2d(Vec3d v)
+        {
+            return new Vec2d(v.x, v.y);
         }
     }
 }

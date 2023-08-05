@@ -1,33 +1,33 @@
 ﻿namespace Vectors
 {
-    internal class Vec2d
+    class Vec2d
     {
         public float x, y;
-        public float size;
+        public float Size => (float)Math.Sqrt(x * x + y * y);
 
         public Vec2d(float x = 0, float y = 0)
         {
             this.x = x;
             this.y = y;
-            this.size = Size();
-        }
-
-        public float Size()
-        { 
-            return (float)Math.Sqrt(this.x* this.x + this.y*this.y);
         }
 
         public void Normalize()
         {
-            if (size != 0)
+            if (Size != 0)
             {
-                this.x /= this.size;
-                this.y /= this.size;
-                this.size = Size();
+                float tempSize = Size;
+                x /= tempSize;
+                y /= tempSize;
             }
         }
 
         // VECTOR OPERATORS
+
+        // Negative
+        public static Vec2d operator -(Vec2d v)
+        {
+            return new Vec2d(-v.x, -v.y);
+        }
 
         // Add
         public static Vec2d operator +(Vec2d v1, Vec2d v2)
@@ -53,6 +53,10 @@
             return v1.x * v2.x + v1.y * v2.y;
         }
 
-
+        // Convert to 3d
+        public static explicit operator Vec3d(Vec2d v)
+        {
+            return new Vec3d(v.x, v.y);
+        }
     }
 }
